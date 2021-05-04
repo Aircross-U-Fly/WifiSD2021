@@ -1,6 +1,8 @@
 ﻿using SD.Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,34 +12,37 @@ namespace SD.Core.Repositories
     public interface IBaseRepository
     {
         #region [C]REATE
-        void Add<T>(T entity, bool saveImmediatley = false)
+        void Add<T>(T entity, bool saveImmediatly = false)
             where T : class, IEntity;
 
-        Task AddAsync<T>(T entity, bool saveImmediatley = false, CancellationToken cancellationToken = default)
+        Task AddAsync<T>(T entity, bool saveImmediatly = false, CancellationToken cancellationToken = default)
             where T : class, IEntity;
         #endregion
 
         #region [R]EAD
-        void Get<T>(T entity, bool saveImmediatley = false)
-            where T : class, IEntity;
-
-        Task GetAsync<T>(T entity, bool saveImmediatley = false, CancellationToken cancellationToken = default)
+        IQueryable<T> QueryFrom<T>(Expression<Func<T, bool>> wherefilter = null)
             where T : class, IEntity;
         #endregion
 
         #region [U]PDATE
-        void Update<T>(T entity, bool saveImmediatley = false)
+        T Update<T>(T entity, object key, bool saveImmediatly = false)
             where T : class, IEntity;
 
-        Task UpdateAsync<T>(T entity, bool saveImmediatley = false, CancellationToken cancellationToken = default)
+        Task<T> UpdateAsync<T>(T entity, object key, bool saveImmediatly = false, CancellationToken cancellationToken = default)
             where T : class, IEntity;
         #endregion
 
         #region [D]ELETE
-        void Delete<T>(T entity, bool saveImmediatley = false)
+        void Remove<T>(T entity, bool saveImmediatly = false)
             where T : class, IEntity;
 
-        Task DeleteAsync<T>(T entity, bool saveImmediatley = false, CancellationToken cancellationToken = default)
+        Task RemoveAsync<T>(T entity, bool saveImmediatly = false, CancellationToken cancellationToken = default)
+            where T : class, IEntity;
+
+        void RemoveByKey<T>(object key, bool saveImmediatly = false)
+            where T : class, IEntity;
+
+        Task RemoveByKeyAsync<T>(object key, bool saveImmediatly = false, CancellationToken cancellationToken = default)
             where T : class, IEntity;
         #endregion
     }

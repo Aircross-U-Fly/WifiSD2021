@@ -2,6 +2,7 @@
 using SD.Core.Entities.Movies;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace SD.Persistence.Repositories.DBContexts
@@ -24,9 +25,20 @@ namespace SD.Persistence.Repositories.DBContexts
         //Konfiguration vom DB-Context -> Migration im Repository implementieren
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+
+            var currentDirectory = Directory.GetCurrentDirectory();
+
+#if DEBUG
+            if (currentDirectory.IndexOf("bin") > -1)
+            {
+                currentDirectory = currentDirectory.Substring(0, currentDirectory.IndexOf("bin"));
+            }
+#endif
+
+
         }
 
-        //Fluent - API
+        //Fluent - API and Seed Method
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
         }
