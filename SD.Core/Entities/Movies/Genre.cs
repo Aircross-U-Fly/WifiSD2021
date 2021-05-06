@@ -14,7 +14,7 @@ namespace SD.Core.Entities.Movies
         }
 
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public int MoviesId { get; }
 

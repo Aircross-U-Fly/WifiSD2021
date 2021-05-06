@@ -1,10 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace SD.Core.Entities.Movies
 {
+
+    public enum MediumTypeEnum
+    {
+        BR,
+        BR4K,
+        BR3D,
+        BRHDR,
+        DVD,
+        ST,
+    }
+
+    [Table("MediumType")]
     public class MediumType : IEntity
     {
         public MediumType()
