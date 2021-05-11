@@ -6,6 +6,17 @@ using System.Text;
 
 namespace SD.Core.Entities.Movies
 {
+
+    public enum Ratings : byte
+    {
+        veryBad = 1,
+        bad,
+        ok,
+        good,
+        veryGood
+    }
+
+    [Table("Movies")]
     public class Movie : IEntity
     {
         /* int, long, smallint, Guid und die Id besitzt => PK (Primary Key) */
@@ -31,5 +42,7 @@ namespace SD.Core.Entities.Movies
 
         [ForeignKey(nameof(Movie.MediumTypeCode))]
         public MediumType MediumType { get; set; }
+
+        public Ratings Rating { get; set; }
     }
 }

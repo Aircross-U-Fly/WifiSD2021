@@ -67,7 +67,7 @@ namespace SD.Persistence.Repositories.DBContexts
                         .HasOne(m => m.MediumType)
                         .WithMany(m => m.Movies)
                         .HasForeignKey(m => m.MediumTypeCode)
-                        .OnDelete(DeleteBehavior.Cascade); //Löschweitergabe unterbunden
+                        .OnDelete(DeleteBehavior.Restrict); //Löschweitergabe unterbunden
 
             //modelBuilder.Entity<MediumType>()
             //            .HasMany(m => m.Movies)
@@ -79,7 +79,7 @@ namespace SD.Persistence.Repositories.DBContexts
                         .HasMany(g => g.Movies)            // Ein Genre kann in beliebig vielen Movie Datensätzen verwendet werden
                         .WithOne(g => g.Genre)             // Jedes Genre existiert nur einmal und für ein Movie kann nur ein Genre definiert werden
                         .HasForeignKey(g => g.GenreId)     // Fremdschlüssel PK => FK
-                        .OnDelete(DeleteBehavior.Cascade); // Löschweitergabe unterbinden
+                        .OnDelete(DeleteBehavior.Restrict); // Löschweitergabe unterbinden
 
 
             modelBuilder.Entity<Genre>().HasData(
@@ -107,6 +107,7 @@ namespace SD.Persistence.Repositories.DBContexts
                     Name = "Rambo",
                     Price = 4.99M,
                     ReleaseDate = new DateTime(1985, 04, 13),
+                    Rating = Ratings.ok
                 },
                 new Movie
                 {
@@ -116,6 +117,7 @@ namespace SD.Persistence.Repositories.DBContexts
                     Name = "Star Trek - Beyond",
                     Price = 6.34M,
                     ReleaseDate = new DateTime(2016, 05, 30),
+                    Rating = Ratings.veryGood
                 },
                 new Movie
                 {
@@ -125,6 +127,7 @@ namespace SD.Persistence.Repositories.DBContexts
                     Name = "Star Wars - Episode IV",
                     Price = 9.99M,
                     ReleaseDate = new DateTime(1987, 4, 13),
+                    Rating = Ratings.good
                 },
                 new Movie
                 {
@@ -134,6 +137,7 @@ namespace SD.Persistence.Repositories.DBContexts
                     Name = "The Ring",
                     Price = 4.50M,
                     ReleaseDate = new DateTime(2005, 11, 15),
+                    Rating = Ratings.bad
                 }
             );
         }
